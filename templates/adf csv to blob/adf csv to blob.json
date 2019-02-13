@@ -1,0 +1,254 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name"
+		},
+		"AzureBlobStorage1": {
+			"type": "string"
+		},
+		"target2": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/adf csv to blob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"typeProperties": {
+							"source": {
+								"type": "BlobSource",
+								"recursive": true
+							},
+							"sink": {
+								"type": "BlobSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"columnMappings": {
+									"pclass": "pclass",
+									"survived": "survived",
+									"name": "name",
+									"sex": "sex",
+									"age": "age",
+									"sibsp": "sibsp",
+									"parch": "parch",
+									"ticket": "ticket",
+									"fare": "fare",
+									"cabin": "cabin",
+									"embarked": "embarked",
+									"boat": "boat",
+									"body": "body",
+									"home.dest": "home.dest"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureBlob11",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureBlob12",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureBlob11')]",
+				"[concat(variables('factoryId'), '/datasets/AzureBlob12')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlob11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureBlobStorage1')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureBlob",
+				"structure": [
+					{
+						"name": "pclass",
+						"type": "String"
+					},
+					{
+						"name": "survived",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "sex",
+						"type": "String"
+					},
+					{
+						"name": "age",
+						"type": "String"
+					},
+					{
+						"name": "sibsp",
+						"type": "String"
+					},
+					{
+						"name": "parch",
+						"type": "String"
+					},
+					{
+						"name": "ticket",
+						"type": "String"
+					},
+					{
+						"name": "fare",
+						"type": "String"
+					},
+					{
+						"name": "cabin",
+						"type": "String"
+					},
+					{
+						"name": "embarked",
+						"type": "String"
+					},
+					{
+						"name": "boat",
+						"type": "String"
+					},
+					{
+						"name": "body",
+						"type": "String"
+					},
+					{
+						"name": "home.dest",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"quoteChar": "\"",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "titanic.csv",
+					"folderPath": "mahesh"
+				}
+			}
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlob12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('target2')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureBlob",
+				"structure": [
+					{
+						"name": "pclass",
+						"type": "Int16"
+					},
+					{
+						"name": "survived",
+						"type": "Int16"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "sex",
+						"type": "String"
+					},
+					{
+						"name": "age",
+						"type": "Double"
+					},
+					{
+						"name": "sibsp",
+						"type": "Int32"
+					},
+					{
+						"name": "parch",
+						"type": "Int64"
+					},
+					{
+						"name": "ticket",
+						"type": "String"
+					},
+					{
+						"name": "fare",
+						"type": "Double"
+					},
+					{
+						"name": "cabin",
+						"type": "String"
+					},
+					{
+						"name": "embarked",
+						"type": "String"
+					},
+					{
+						"name": "boat",
+						"type": "String"
+					},
+					{
+						"name": "body",
+						"type": "String"
+					},
+					{
+						"name": "home.dest",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": "",
+					"folderPath": "mahesh"
+				}
+			}
+		}
+	]
+}
