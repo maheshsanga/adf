@@ -26,8 +26,8 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": false
 			},
-			"fileName": "emp.txt",
-			"folderPath": "mahesh"
+			"fileName": "text.txt",
+			"folderPath": "myblobstorage"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
