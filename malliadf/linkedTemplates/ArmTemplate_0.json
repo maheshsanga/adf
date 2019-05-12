@@ -21,11 +21,11 @@
 		},
 		"AzureBlob1_properties_typeProperties_fileName": {
 			"type": "string",
-			"defaultValue": "emp.txt"
+			"defaultValue": "text.txt"
 		},
 		"AzureBlob1_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "mahesh"
+			"defaultValue": "myblobstorage"
 		},
 		"AzureBlob2_properties_typeProperties_fileName": {
 			"type": "string",

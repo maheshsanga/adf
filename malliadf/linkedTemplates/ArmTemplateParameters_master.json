@@ -15,10 +15,10 @@
 			"value": ""
 		},
 		"AzureBlob1_properties_typeProperties_fileName": {
-			"value": "emp.txt"
+			"value": "text.txt"
 		},
 		"AzureBlob1_properties_typeProperties_folderPath": {
-			"value": "mahesh"
+			"value": "myblobstorage"
 		},
 		"AzureBlob2_properties_typeProperties_fileName": {
 			"value": ""
