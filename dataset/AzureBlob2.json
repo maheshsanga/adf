@@ -21,7 +21,7 @@
 				"type": "TextFormat",
 				"columnDelimiter": ",",
 				"rowDelimiter": "",
-				"nullValue": "\\N",
+				"nullValue": "",
 				"treatEmptyAsNull": true,
 				"skipLineCount": 0,
 				"firstRowAsHeader": false
